@@ -25,6 +25,12 @@
 		613EBDD11776DDFA004FBA47 /* scrollerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDD01776DDFA004FBA47 /* scrollerTests.m */; };
 		613EBDEC1776E174004FBA47 /* HZScrollerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEB1776E174004FBA47 /* HZScrollerController.m */; };
 		613EBDED1776E174004FBA47 /* HZScrollerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEB1776E174004FBA47 /* HZScrollerController.m */; };
+		613EBDF01776E2A2004FBA47 /* HZScrollerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEF1776E2A2004FBA47 /* HZScrollerBar.m */; };
+		613EBDF11776E2A2004FBA47 /* HZScrollerBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEF1776E2A2004FBA47 /* HZScrollerBar.m */; };
+		613EBDF41776E35C004FBA47 /* HZScrollerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF31776E35C004FBA47 /* HZScrollerItem.m */; };
+		613EBDF51776E35C004FBA47 /* HZScrollerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF31776E35C004FBA47 /* HZScrollerItem.m */; };
+		613EBDF81776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */; };
+		613EBDF91776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +68,12 @@
 		613EBDD01776DDFA004FBA47 /* scrollerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scrollerTests.m; sourceTree = "<group>"; };
 		613EBDEA1776E174004FBA47 /* HZScrollerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZScrollerController.h; sourceTree = "<group>"; };
 		613EBDEB1776E174004FBA47 /* HZScrollerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZScrollerController.m; sourceTree = "<group>"; };
+		613EBDEE1776E2A2004FBA47 /* HZScrollerBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZScrollerBar.h; sourceTree = "<group>"; };
+		613EBDEF1776E2A2004FBA47 /* HZScrollerBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZScrollerBar.m; sourceTree = "<group>"; };
+		613EBDF21776E35C004FBA47 /* HZScrollerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZScrollerItem.h; sourceTree = "<group>"; };
+		613EBDF31776E35C004FBA47 /* HZScrollerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZScrollerItem.m; sourceTree = "<group>"; };
+		613EBDF61776E7DC004FBA47 /* UIViewController+Scorller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Scorller.h"; sourceTree = "<group>"; };
+		613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Scorller.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +182,12 @@
 			children = (
 				613EBDEA1776E174004FBA47 /* HZScrollerController.h */,
 				613EBDEB1776E174004FBA47 /* HZScrollerController.m */,
+				613EBDEE1776E2A2004FBA47 /* HZScrollerBar.h */,
+				613EBDEF1776E2A2004FBA47 /* HZScrollerBar.m */,
+				613EBDF21776E35C004FBA47 /* HZScrollerItem.h */,
+				613EBDF31776E35C004FBA47 /* HZScrollerItem.m */,
+				613EBDF61776E7DC004FBA47 /* UIViewController+Scorller.h */,
+				613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */,
 			);
 			path = scrollercontroller;
 			sourceTree = "<group>";
@@ -288,6 +306,9 @@
 				613EBDB01776DDF9004FBA47 /* AppDelegate.m in Sources */,
 				613EBDBC1776DDF9004FBA47 /* ViewController.m in Sources */,
 				613EBDEC1776E174004FBA47 /* HZScrollerController.m in Sources */,
+				613EBDF01776E2A2004FBA47 /* HZScrollerBar.m in Sources */,
+				613EBDF41776E35C004FBA47 /* HZScrollerItem.m in Sources */,
+				613EBDF81776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +318,9 @@
 			files = (
 				613EBDD11776DDFA004FBA47 /* scrollerTests.m in Sources */,
 				613EBDED1776E174004FBA47 /* HZScrollerController.m in Sources */,
+				613EBDF11776E2A2004FBA47 /* HZScrollerBar.m in Sources */,
+				613EBDF51776E35C004FBA47 /* HZScrollerItem.m in Sources */,
+				613EBDF91776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
