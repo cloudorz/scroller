@@ -15,6 +15,11 @@
 
 @implementation HZScrollerController
 
+- (void)dealloc
+{
+
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -67,9 +72,8 @@
     [self resetScrollViewHeight];
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
-    
-    [self setSelectedIndex:0 animated:NO];
 
+    [self setSelectedIndex:0 animated:NO];
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
@@ -77,6 +81,8 @@
     if (_selectedIndex != selectedIndex)
     {
         _selectedIndex = selectedIndex;
+        
+//        UIViewController *prevVC = self.selectedViewController;
         
         UIViewController *vc = self.viewControllers[selectedIndex];
         self.selectedViewController = vc;
@@ -161,6 +167,30 @@
         int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
         [self setSelectedIndex:page animated:NO];
     }
+
+}
+
+- (BOOL)checkForScrollable
+{
+    if ([self.selectedViewController isKindOfClass:[UINavigationController class]])
+    {
+        return [[(UINavigationController*)self.selectedViewController topViewController] shouldScrollerScrollable];
+    }
+    else
+    {
+        if (self.selectedViewController.presentedViewController)
+        {
+            return NO;
+        }
+        else
+        {
+            return [self.selectedViewController shouldScrollerScrollable];
+        }
+    }
     
 }
+
+#pragma observer rootViewController change
+
+
 @end
