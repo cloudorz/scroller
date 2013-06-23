@@ -73,6 +73,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidSelected:(BOOL)animated
+{
+    [super viewDidSelected:animated];
+    NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
+}
+
 #pragma mark - Table view data source
 
 

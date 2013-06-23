@@ -17,4 +17,5 @@
 
 - (BOOL)shouldScrollerScrollable;
 - (BOOL)shouldHideScrollerBar;
+- (void)viewDidSelected:(BOOL)animated;
 @end

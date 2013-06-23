@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIViewController+Scorller.h"
 
 @interface ViewController : UIViewController
 

@@ -58,6 +58,12 @@
     [super viewDidDisappear:animated];
 }
 
+- (void)viewDidSelected:(BOOL)animated
+{
+    [super viewDidSelected:animated];
+    NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
