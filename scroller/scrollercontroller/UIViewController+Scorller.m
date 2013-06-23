@@ -46,6 +46,7 @@ static const void *ScrollerItemKey = &ScrollerItemKey;
     return NO;
 }
 
+// call this method when view did load
 - (void)viewDidSelected:(BOOL)animated
 {
     NSLog(@"Do Nothing");

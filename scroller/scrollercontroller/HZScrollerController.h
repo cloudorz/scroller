@@ -17,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet HZScrollerBar *scrollerBar;
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *selectedViewController;
-@property (nonatomic) NSUInteger selectedIndex;
+@property (nonatomic) NSInteger selectedIndex;
 
 @end
 

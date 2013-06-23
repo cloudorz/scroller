@@ -7,7 +7,6 @@
 //
 
 #import "HZScrollerController.h"
-#import "UIViewController+Scorller.h"
 
 @interface HZScrollerController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -20,6 +19,7 @@
 {
     [super awakeFromNib];
      NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
+    _selectedIndex = -1;
     [self configureViewControllersFromStoryboard];
 }
 
@@ -68,33 +68,34 @@
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     
-    self.selectedIndex = 1;
+    [self setSelectedIndex:0 animated:NO];
 
 }
 
-- (void)setSelectedIndex:(NSUInteger)selectedIndex
-{
-    [self setSelectedIndex:selectedIndex animated:NO];
-}
-
-- (void)setSelectedIndex:(NSUInteger)selectedIndex animated:(BOOL)animated
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
 {
     if (_selectedIndex != selectedIndex)
     {
         _selectedIndex = selectedIndex;
         
         UIViewController *vc = self.viewControllers[selectedIndex];
-        [self addViewControllerToScroller:vc];
         self.selectedViewController = vc;
         
-        if ([vc isKindOfClass:[UINavigationController class]])
+        if (vc.view.superview == nil)
         {
-            UINavigationController *nav = (UINavigationController*)vc;
-            [nav.topViewController viewDidSelected:YES];
+            [self addViewControllerToScroller:vc];
         }
         else
         {
-            [vc viewDidSelected:YES];
+            if ([vc isKindOfClass:[UINavigationController class]])
+            {
+                UINavigationController *nav = (UINavigationController*)vc;
+                [nav.topViewController viewDidSelected:YES];
+            }
+            else
+            {
+                [vc viewDidSelected:YES];
+            }
         }
         
         [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
@@ -148,11 +149,6 @@
     [super viewDidUnload];
 }
 
-- (void)scrollToController:(NSUInteger)index animated:(BOOL)animated
-{
-    
-}
-
 
 # pragma mark - scrollview delegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -161,7 +157,7 @@
     {
         CGFloat pageWidth = scrollView.frame.size.width;
         int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-        self.selectedIndex = page;
+        [self setSelectedIndex:page animated:NO];
     }
     
 }
