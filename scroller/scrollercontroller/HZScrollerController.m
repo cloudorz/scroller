@@ -7,8 +7,9 @@
 //
 
 #import "HZScrollerController.h"
+#import "UIViewController+Scorller.h"
 
-@interface HZScrollerController ()
+@interface HZScrollerController () <UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -30,6 +31,9 @@
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
     ;
+    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop){
+        vc.scrollerController = self;
+    }];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,17 +46,34 @@
     return self;
 }
 
+- (void)resetScrollViewHeight
+{
+    CGRect scrollViewFrame = self.scrollView.frame;
+    CGFloat deltaHeight = 0;
+    if (self.scrollerBar.hidden == NO)
+    {
+        deltaHeight = self.scrollerBar.frame.size.height;
+    }
+    scrollViewFrame.size.height = self.view.frame.size.height - deltaHeight;
+    scrollViewFrame.origin.y = deltaHeight;
+    self.scrollView.frame= scrollViewFrame;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
+    
+    [self resetScrollViewHeight];
+    
+    self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
+    UIViewController *vc = self.viewControllers[self.selectedIndex];
+    NSLog(@"use vc's view");
+    vc.view.frame = CGRectMake(self.scrollView.frame.size.width*self.selectedIndex, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    [self.scrollView addSubview:vc.view];
+    self.selectedViewController = vc;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
