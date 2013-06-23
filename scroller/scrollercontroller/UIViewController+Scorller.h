@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HZScrollerController.h"
+#import "HZScrollerItem.h"
 
 @interface UIViewController (Scorller)
 
+@property (strong, nonatomic) HZScrollerController *scrollerController;
+@property (strong, nonatomic) HZScrollerItem *scrollerItem;
+
+- (BOOL)shouldScrollerScrollable;
+- (BOOL)shouldHideScrollerBar;
 @end

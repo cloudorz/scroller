@@ -8,6 +8,42 @@
 
 #import "UIViewController+Scorller.h"
 
+#import <objc/runtime.h>
+
+static const void *ScrollerControllerKey = &ScrollerControllerKey;
+static const void *ScrollerItemKey = &ScrollerItemKey;
+
 @implementation UIViewController (Scorller)
+@dynamic scrollerController, scrollerItem;
+
+- (HZScrollerController*)scrollerController
+{
+    return objc_getAssociatedObject(self, ScrollerControllerKey);
+}
+
+- (void)setScrollerController:(HZScrollerController *)scrollerController
+{
+    objc_setAssociatedObject(self, ScrollerControllerKey, scrollerController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (HZScrollerItem *)scrollerItem
+{
+    return objc_getAssociatedObject(self, ScrollerItemKey);
+}
+
+- (void)setScrollerItem:(HZScrollerItem *)scrollerItem
+{
+    objc_setAssociatedObject(self, ScrollerItemKey, scrollerItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)shouldScrollerScrollable
+{
+    return YES;
+}
+
+- (BOOL)shouldHideScrollerBar
+{
+    return NO;
+}
 
 @end
