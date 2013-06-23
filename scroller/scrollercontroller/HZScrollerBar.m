@@ -28,4 +28,9 @@
 }
 */
 
+- (void)setItems:(NSArray *)items animated:(BOOL)animated
+{
+    
+}
+
 @end
