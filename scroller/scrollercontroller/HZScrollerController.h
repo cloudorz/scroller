@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIViewController *selectedViewController;
 @property (nonatomic) NSInteger selectedIndex;
 
+- (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
 @end
 
 @protocol HZScrollerControllerDelegate <NSObject>
