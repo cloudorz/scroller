@@ -147,11 +147,11 @@
 				613EBDB71776DDF9004FBA47 /* MainStoryboard.storyboard */,
 				613EBDBA1776DDF9004FBA47 /* ViewController.h */,
 				613EBDBB1776DDF9004FBA47 /* ViewController.m */,
-				613EBDA61776DDF9004FBA47 /* Supporting Files */,
 				613EBDFA1776F403004FBA47 /* NavTableViewController.h */,
 				613EBDFB1776F403004FBA47 /* NavTableViewController.m */,
 				613EBDFE1776F412004FBA47 /* TableViewController.h */,
 				613EBDFF1776F412004FBA47 /* TableViewController.m */,
+				613EBDA61776DDF9004FBA47 /* Supporting Files */,
 			);
 			path = scroller;
 			sourceTree = "<group>";
