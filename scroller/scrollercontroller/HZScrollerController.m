@@ -9,6 +9,7 @@
 #import "HZScrollerController.h"
 
 @interface HZScrollerController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -18,11 +19,17 @@
 {
     [super awakeFromNib];
      NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
+    [self configureViewControllersFromStoryboard];
 }
 
 - (void)configureViewControllersFromStoryboard
 {
-    
+    // TODO: may use auto set
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
+                             [storyboard instantiateViewControllerWithIdentifier:@"navC"],
+                             [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
+    ;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -79,4 +86,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidUnload {
+    [self setScrollView:nil];
+    [super viewDidUnload];
+}
 @end

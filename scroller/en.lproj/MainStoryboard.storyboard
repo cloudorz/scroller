@@ -24,6 +24,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="FtH-vg-KWn" id="0Ur-W5-GNN"/>
+                        <outlet property="scrollerBar" destination="c78-Rw-PPD" id="0zx-j2-k2l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -124,6 +128,7 @@
         <class className="HZScrollerController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/HZScrollerController.h"/>
             <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="scrollerBar" candidateClass="HZScrollerBar"/>
             </relationships>
         </class>
