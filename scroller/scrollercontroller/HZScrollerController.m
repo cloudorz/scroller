@@ -109,6 +109,8 @@
         NSUInteger index = [self.viewControllers indexOfObject:viewController];
         viewController.view.frame = CGRectMake(self.scrollView.frame.size.width*index, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
         [self.scrollView addSubview:viewController.view];
+        NSLog(@"add viewcontroller view success.")
+        ;
     }
     
 }
