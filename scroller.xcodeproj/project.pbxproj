@@ -23,6 +23,8 @@
 		613EBDC61776DDF9004FBA47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613EBDA11776DDF9004FBA47 /* Foundation.framework */; };
 		613EBDCE1776DDFA004FBA47 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 613EBDCC1776DDFA004FBA47 /* InfoPlist.strings */; };
 		613EBDD11776DDFA004FBA47 /* scrollerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDD01776DDFA004FBA47 /* scrollerTests.m */; };
+		613EBDEC1776E174004FBA47 /* HZScrollerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEB1776E174004FBA47 /* HZScrollerController.m */; };
+		613EBDED1776E174004FBA47 /* HZScrollerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDEB1776E174004FBA47 /* HZScrollerController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,8 @@
 		613EBDCD1776DDFA004FBA47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		613EBDCF1776DDFA004FBA47 /* scrollerTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scrollerTests.h; sourceTree = "<group>"; };
 		613EBDD01776DDFA004FBA47 /* scrollerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scrollerTests.m; sourceTree = "<group>"; };
+		613EBDEA1776E174004FBA47 /* HZScrollerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HZScrollerController.h; sourceTree = "<group>"; };
+		613EBDEB1776E174004FBA47 /* HZScrollerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZScrollerController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +121,7 @@
 		613EBDA51776DDF9004FBA47 /* scroller */ = {
 			isa = PBXGroup;
 			children = (
+				613EBDE91776E165004FBA47 /* scrollercontroller */,
 				613EBDAE1776DDF9004FBA47 /* AppDelegate.h */,
 				613EBDAF1776DDF9004FBA47 /* AppDelegate.m */,
 				613EBDB71776DDF9004FBA47 /* MainStoryboard.storyboard */,
@@ -158,6 +163,15 @@
 				613EBDCC1776DDFA004FBA47 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		613EBDE91776E165004FBA47 /* scrollercontroller */ = {
+			isa = PBXGroup;
+			children = (
+				613EBDEA1776E174004FBA47 /* HZScrollerController.h */,
+				613EBDEB1776E174004FBA47 /* HZScrollerController.m */,
+			);
+			path = scrollercontroller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +287,7 @@
 				613EBDAC1776DDF9004FBA47 /* main.m in Sources */,
 				613EBDB01776DDF9004FBA47 /* AppDelegate.m in Sources */,
 				613EBDBC1776DDF9004FBA47 /* ViewController.m in Sources */,
+				613EBDEC1776E174004FBA47 /* HZScrollerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				613EBDD11776DDFA004FBA47 /* scrollerTests.m in Sources */,
+				613EBDED1776E174004FBA47 /* HZScrollerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
