@@ -31,6 +31,10 @@
 		613EBDF51776E35C004FBA47 /* HZScrollerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF31776E35C004FBA47 /* HZScrollerItem.m */; };
 		613EBDF81776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */; };
 		613EBDF91776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */; };
+		613EBDFC1776F403004FBA47 /* NavTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDFB1776F403004FBA47 /* NavTableViewController.m */; };
+		613EBDFD1776F403004FBA47 /* NavTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDFB1776F403004FBA47 /* NavTableViewController.m */; };
+		613EBE001776F412004FBA47 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDFF1776F412004FBA47 /* TableViewController.m */; };
+		613EBE011776F412004FBA47 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 613EBDFF1776F412004FBA47 /* TableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,10 @@
 		613EBDF31776E35C004FBA47 /* HZScrollerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZScrollerItem.m; sourceTree = "<group>"; };
 		613EBDF61776E7DC004FBA47 /* UIViewController+Scorller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Scorller.h"; sourceTree = "<group>"; };
 		613EBDF71776E7DC004FBA47 /* UIViewController+Scorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Scorller.m"; sourceTree = "<group>"; };
+		613EBDFA1776F403004FBA47 /* NavTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavTableViewController.h; sourceTree = "<group>"; };
+		613EBDFB1776F403004FBA47 /* NavTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavTableViewController.m; sourceTree = "<group>"; };
+		613EBDFE1776F412004FBA47 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		613EBDFF1776F412004FBA47 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +148,10 @@
 				613EBDBA1776DDF9004FBA47 /* ViewController.h */,
 				613EBDBB1776DDF9004FBA47 /* ViewController.m */,
 				613EBDA61776DDF9004FBA47 /* Supporting Files */,
+				613EBDFA1776F403004FBA47 /* NavTableViewController.h */,
+				613EBDFB1776F403004FBA47 /* NavTableViewController.m */,
+				613EBDFE1776F412004FBA47 /* TableViewController.h */,
+				613EBDFF1776F412004FBA47 /* TableViewController.m */,
 			);
 			path = scroller;
 			sourceTree = "<group>";
@@ -309,6 +321,8 @@
 				613EBDF01776E2A2004FBA47 /* HZScrollerBar.m in Sources */,
 				613EBDF41776E35C004FBA47 /* HZScrollerItem.m in Sources */,
 				613EBDF81776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */,
+				613EBDFC1776F403004FBA47 /* NavTableViewController.m in Sources */,
+				613EBE001776F412004FBA47 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +335,8 @@
 				613EBDF11776E2A2004FBA47 /* HZScrollerBar.m in Sources */,
 				613EBDF51776E35C004FBA47 /* HZScrollerItem.m in Sources */,
 				613EBDF91776E7DC004FBA47 /* UIViewController+Scorller.m in Sources */,
+				613EBDFD1776F403004FBA47 /* NavTableViewController.m in Sources */,
+				613EBE011776F412004FBA47 /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
