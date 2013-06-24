@@ -19,5 +19,5 @@
 - (BOOL)shouldScrollerScrollable;
 - (BOOL)shouldHideScrollerBar;
 - (void)viewDidSelected:(BOOL)animated;
-
+- (BOOL)isModal;
 @end
