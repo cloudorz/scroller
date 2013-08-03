@@ -8,7 +8,7 @@
 
 #import "HZScrollerController.h"
 
-@interface HZScrollerController () <UIScrollViewDelegate>
+@interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -17,7 +17,7 @@
 
 - (void)dealloc
 {
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)awakeFromNib
@@ -35,9 +35,14 @@
     self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
-    ;
-    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop){
-        vc.scrollerController = self;
+
+    [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
+        [vc setScrollerController:self];
+        if ([vc isKindOfClass:[UINavigationController class]])
+        {
+            [[vc topViewController] setScrollerController:vc];
+            [vc setDelegate:self];
+        }
     }];
 }
 
@@ -76,6 +81,12 @@
     [self setSelectedIndex:0 animated:NO];
 }
 
+- (void)hideScorllerBar:(BOOL)hide
+{
+    self.scrollerBar.hidden = hide;
+    [self resetScrollViewHeight];
+}
+
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
 {
     if (_selectedIndex != selectedIndex)
@@ -90,6 +101,7 @@
         if (vc.view.superview == nil)
         {
             [self addViewControllerToScroller:vc];
+            // TODO: trigger didload method
         }
         else
         {
@@ -114,8 +126,7 @@
         NSUInteger index = [self.viewControllers indexOfObject:viewController];
         viewController.view.frame = CGRectMake(self.scrollView.frame.size.width*index, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
         [self.scrollView addSubview:viewController.view];
-        NSLog(@"add viewcontroller view success.")
-        ;
+        NSLog(@"add viewcontroller view success.");
     }
     
 }
@@ -169,27 +180,18 @@
 
 }
 
-- (BOOL)checkForScrollable
-{
-    if ([self.selectedViewController isKindOfClass:[UINavigationController class]])
-    {
-        return [[(UINavigationController*)self.selectedViewController topViewController] shouldScrollerScrollable];
-    }
-    else
-    {
-        if (self.selectedViewController.presentedViewController)
-        {
-            return NO;
-        }
-        else
-        {
-            return [self.selectedViewController shouldScrollerScrollable];
-        }
-    }
-    
-}
-
 #pragma observer rootViewController change
 
+#pragma mark - uinavigationcontroller delegate
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    NSLog(@"view contller did show: %@", viewController);
+    self.scrollView.scrollEnabled = [viewController shouldScrollerScrollable];
+    viewController.scrollerController = self;
+}
 
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    NSLog(@"view contller will show: %@", viewController);
+}
 @end

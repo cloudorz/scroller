@@ -64,6 +64,12 @@
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 }
 
+- (IBAction)showModalPage:(id)sender
+{
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"showModal"];
+    [self.scrollerController presentViewController:vc animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
