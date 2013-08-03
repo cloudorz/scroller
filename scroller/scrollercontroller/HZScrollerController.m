@@ -74,7 +74,7 @@
     [super viewDidLoad];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
     
-    [self resetScrollViewHeight];
+//    [self resetScrollViewHeight];
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
@@ -180,18 +180,38 @@
 
 }
 
-#pragma observer rootViewController change
-
 #pragma mark - uinavigationcontroller delegate
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    NSLog(@"view contller did show: %@", viewController);
-    self.scrollView.scrollEnabled = [viewController shouldScrollerScrollable];
-    viewController.scrollerController = self;
-}
-
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    NSUInteger count = navigationController.viewControllers.count;
+    
+    self.scrollView.scrollEnabled = ([viewController shouldScrollerScrollable] || count == 1); // 第一页必须可滑动
+    
+    viewController.scrollerController = self;
+    
+    if ([viewController shouldHideScrollerBar] &&
+        count == 2 &&
+        [self.scrollerBar.superview isEqual:self.view])
+    {
+        [self.scrollerBar removeFromSuperview];
+        [[navigationController.viewControllers[0] view] addSubview:self.scrollerBar];
+    }
+
     NSLog(@"view contller will show: %@", viewController);
 }
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    NSUInteger count = navigationController.viewControllers.count;
+
+    if (count == 1 && ![self.scrollerBar.superview isEqual:self.view])
+    {
+        [self.scrollerBar removeFromSuperview];
+        [self.view addSubview:self.scrollerBar];
+    }
+    
+    NSLog(@"view contller did show: %@", viewController);
+}
+
+
 @end

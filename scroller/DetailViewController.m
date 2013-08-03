@@ -41,6 +41,11 @@
     return NO;
 }
 
+- (BOOL)shouldHideScrollerBar
+{
+    return YES;
+}
+
 - (IBAction)cancelAction
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
