@@ -527,6 +527,7 @@
 				613EBDD61776DDFA004FBA47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		613EBDD71776DDFA004FBA47 /* Build configuration list for PBXNativeTarget "scrollerTests" */ = {
 			isa = XCConfigurationList;
@@ -535,6 +536,7 @@
 				613EBDD91776DDFA004FBA47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

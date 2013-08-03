@@ -93,10 +93,9 @@
         }
         else
         {
-            if ([vc isKindOfClass:[UINavigationController class]])
+            if ([vc respondsToSelector:@selector(topViewController)])
             {
-                UINavigationController *nav = (UINavigationController*)vc;
-                [nav.topViewController viewDidSelected:YES];
+                [[(id)vc topViewController] viewDidSelected:YES];
             }
             else
             {
