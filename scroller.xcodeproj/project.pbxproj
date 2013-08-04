@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B538A0717ADF6EE0054E71F /* Detail3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */; };
 		613EBDA01776DDF9004FBA47 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613EBD9F1776DDF9004FBA47 /* UIKit.framework */; };
 		613EBDA21776DDF9004FBA47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613EBDA11776DDF9004FBA47 /* Foundation.framework */; };
 		613EBDA41776DDF9004FBA47 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613EBDA31776DDF9004FBA47 /* CoreGraphics.framework */; };
@@ -52,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B538A0517ADF6EE0054E71F /* Detail3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail3ViewController.h; sourceTree = "<group>"; };
+		3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail3ViewController.m; sourceTree = "<group>"; };
 		613EBD9C1776DDF9004FBA47 /* scroller.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = scroller.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		613EBD9F1776DDF9004FBA47 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		613EBDA11776DDF9004FBA47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -163,6 +166,8 @@
 				613EBE03177731EB004FBA47 /* DetailViewController.m */,
 				613EBE061777337D004FBA47 /* Detail2ViewController.h */,
 				613EBE071777337D004FBA47 /* Detail2ViewController.m */,
+				3B538A0517ADF6EE0054E71F /* Detail3ViewController.h */,
+				3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */,
 				613EBDA61776DDF9004FBA47 /* Supporting Files */,
 			);
 			path = scroller;
@@ -337,6 +342,7 @@
 				613EBE001776F412004FBA47 /* TableViewController.m in Sources */,
 				613EBE04177731EB004FBA47 /* DetailViewController.m in Sources */,
 				613EBE081777337E004FBA47 /* Detail2ViewController.m in Sources */,
+				3B538A0717ADF6EE0054E71F /* Detail3ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

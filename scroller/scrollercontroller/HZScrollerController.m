@@ -185,13 +185,11 @@
 {
     NSUInteger count = navigationController.viewControllers.count;
     
-    self.scrollView.scrollEnabled = ([viewController shouldScrollerScrollable] || count == 1); // 第一页必须可滑动
+    self.scrollView.scrollEnabled = (count == 1); // 第一页可滑动
     
     viewController.scrollerController = self;
     
-    if ([viewController shouldHideScrollerBar] &&
-        count == 2 &&
-        [self.scrollerBar.superview isEqual:self.view])
+    if (count > 1 && [self.scrollerBar.superview isEqual:self.view])
     {
         [self.scrollerBar removeFromSuperview];
         [[navigationController.viewControllers[0] view] addSubview:self.scrollerBar];

@@ -1,18 +1,18 @@
 //
-//  DetailViewController.m
+//  Detail3ViewController.m
 //  scroller
 //
-//  Created by Cloud Dai on 13-6-23.
+//  Created by Cloud Dai on 13-8-4.
 //  Copyright (c) 2013年 Cloud Dai. All rights reserved.
 //
 
-#import "DetailViewController.h"
+#import "Detail3ViewController.h"
 
-@interface DetailViewController ()
+@interface Detail3ViewController ()
 
 @end
 
-@implementation DetailViewController
+@implementation Detail3ViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,7 +26,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
 	// Do any additional setup after loading the view.
 }
 
@@ -38,6 +37,7 @@
 
 - (IBAction)cancelAction
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 @end

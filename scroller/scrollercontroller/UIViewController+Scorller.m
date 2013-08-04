@@ -48,17 +48,6 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 }
 
 #pragma mark - extension method
-
-- (BOOL)shouldScrollerScrollable
-{
-    return YES;
-}
-
-- (BOOL)shouldHideScrollerBar
-{
-    return NO;
-}
-
 // call this method when view did load
 - (void)viewDidSelected:(BOOL)animated
 {
