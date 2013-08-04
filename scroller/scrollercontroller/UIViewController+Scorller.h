@@ -16,8 +16,6 @@
 @property (strong, nonatomic) HZScrollerItem *scrollerItem;
 @property (strong, nonatomic) UIView *scrollerTitleView;
 
-- (BOOL)shouldScrollerScrollable;
-- (BOOL)shouldHideScrollerBar;
 - (void)viewDidSelected:(BOOL)animated;
 - (BOOL)isModal;
 @end
