@@ -78,7 +78,7 @@
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
-    [self setSelectedIndex:0 animated:NO];
+    [self setSelectedIndex:1 animated:NO];
 }
 
 - (void)hideScorllerBar:(BOOL)hide
