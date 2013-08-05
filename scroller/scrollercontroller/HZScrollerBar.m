@@ -147,11 +147,16 @@ const static CGFloat kMargin = 12.0f;
                              _titleView.transform = oldViewTransform;
                              _titleView.alpha = 0.25;
                              titleView.transform = newViewTransform;
-                             titleView.alpha = 1.0;
+                             titleView.alpha = 0.7;
                          }
                          completion:^(BOOL finished){
                              [_titleView removeFromSuperview];
                              _titleView = titleView;
+                             
+                             [UIView animateWithDuration:0.2
+                                              animations:^{
+                                                  titleView.alpha = 1.0;
+                                              }];
                          }];
     }
 
