@@ -13,7 +13,7 @@
 
 @interface HZScrollerController : UIViewController
 
-@property (nonatomic, assign) id <HZScrollerControllerDelegate> delegate;
+@property (nonatomic, weak) id <HZScrollerControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet HZScrollerBar *scrollerBar;
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *selectedViewController;

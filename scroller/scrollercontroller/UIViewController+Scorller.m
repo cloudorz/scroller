@@ -12,10 +12,9 @@
 
 static const void *ScrollerControllerKey = &ScrollerControllerKey;
 static const void *ScrollerItemKey = &ScrollerItemKey;
-static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 
 @implementation UIViewController (Scorller)
-@dynamic scrollerController, scrollerItem, scrollerTitleView;
+@dynamic scrollerController, scrollerItem;
 
 - (HZScrollerController*)scrollerController
 {
@@ -37,14 +36,9 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
     objc_setAssociatedObject(self, ScrollerItemKey, scrollerItem, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIView *)scrollerTitleView
+- (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction
 {
-    return objc_getAssociatedObject(self, ScrollerTitleViewKey);
-}
-
-- (void)setScrollerTitleView:(UIView *)scrollerTitleView
-{
-    objc_setAssociatedObject(self, ScrollerTitleViewKey, scrollerTitleView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self.scrollerController.scrollerBar setTitleView:titleView animatedDirection:direction];
 }
 
 #pragma mark - extension method

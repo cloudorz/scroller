@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "HZScrollerController.h"
 #import "HZScrollerItem.h"
+#import "HZScrollerBar.h"
 
 @interface UIViewController (Scorller)
 
 @property (strong, nonatomic) HZScrollerController *scrollerController;
 @property (strong, nonatomic) HZScrollerItem *scrollerItem;
-@property (strong, nonatomic) UIView *scrollerTitleView;
 
+- (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction;
 - (void)viewDidSelected:(BOOL)animated;
 - (BOOL)isModal;
 @end

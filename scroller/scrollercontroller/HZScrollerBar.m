@@ -11,24 +11,37 @@
 const static CGFloat kItemWidth = 20.0f;
 const static CGFloat kitemDistance = 3.0f;
 const static CGFloat kItemHeight = 20.0f;
+const static CGFloat kMargin = 12.0f;
 
 @interface HZScrollerBar ()
 
 @property (nonatomic, strong) NSNumber *selectedItemIndex;
+@property (nonatomic, strong) UIView *titleView;
 
 @end
 
 @implementation HZScrollerBar
+
+- (void)doInitBar
+{
+    self.clipsToBounds = YES;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self doInitBar];
     }
     return self;
 }
 
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    [self doInitBar];
+}
 
 - (void)setItems:(NSArray *)items animated:(BOOL)animated
 {
@@ -42,7 +55,7 @@ const static CGFloat kItemHeight = 20.0f;
         // add the new items
         _items = items;
         
-        CGFloat x = self.frame.size.width - (12 + kItemWidth*items.count + kitemDistance*(items.count-1));
+        CGFloat x = self.frame.size.width - (kMargin + kItemWidth*items.count + kitemDistance*(items.count-1));
         
         [items enumerateObjectsUsingBlock:^(HZScrollerItem *item, NSUInteger idx, BOOL *stop){
             
@@ -86,6 +99,62 @@ const static CGFloat kItemHeight = 20.0f;
 - (void)selectItemAtIndex:(NSUInteger)index animated:(BOOL)animated
 {
     self.selectedItemIndex = @(index);
+}
+
+- (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction
+{
+    if (!titleView)
+    {
+        return;
+    }
+    
+    CGAffineTransform newViewTransform;
+    newViewTransform = CGAffineTransformMakeTranslation(kMargin, (self.frame.size.height-titleView.frame.size.height)/2);
+    
+    if (!_titleView || direction == HZAnimatedNo)
+    {
+        [_titleView removeFromSuperview];
+        
+        titleView.transform = newViewTransform;
+        [self addSubview:titleView];
+        
+        _titleView = titleView;
+    }
+    else
+    {
+        CGAffineTransform oldViewTransform;
+
+        switch (direction) {
+            case HZAnimatedLeft:
+                oldViewTransform = CGAffineTransformMakeTranslation(_titleView.frame.origin.x+_titleView.frame.size.width, _titleView.frame.origin.y);
+                titleView.transform = CGAffineTransformMakeTranslation(-titleView.frame.size.width, (self.frame.size.height-titleView.frame.size.height)/2);
+                break;
+                
+            case HZAnimatedTop:
+                oldViewTransform = CGAffineTransformMakeTranslation(kMargin, self.frame.size.height);
+                titleView.transform = CGAffineTransformMakeTranslation(kMargin, -titleView.frame.size.height);
+                break;
+                
+            default:
+                break;
+        }
+        
+        titleView.alpha = 0.25;
+        [self addSubview:titleView];
+        
+        [UIView animateWithDuration:0.36
+                         animations:^{
+                             _titleView.transform = oldViewTransform;
+                             _titleView.alpha = 0.25;
+                             titleView.transform = newViewTransform;
+                             titleView.alpha = 1.0;
+                         }
+                         completion:^(BOOL finished){
+                             [_titleView removeFromSuperview];
+                             _titleView = titleView;
+                         }];
+    }
+
 }
 
 @end

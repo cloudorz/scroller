@@ -9,17 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "HZScrollerItem.h"
 
+typedef NS_ENUM(NSUInteger, HZAnimatedDirection){
+    HZAnimatedNo,
+    HZAnimatedLeft,
+    HZAnimatedTop,
+};
+
 @protocol HZScrollerBarDelegate;
 
 @interface HZScrollerBar : UIView
 
 @property (nonatomic, weak) id <HZScrollerBarDelegate> delegate;
 @property (nonatomic, copy) NSArray *items;
-@property (nonatomic, strong) IBOutlet UIView *titleView;
 @property (nonatomic, strong) HZScrollerItem *selectedItem;
 
 - (void)setItems:(NSArray *)items animated:(BOOL)animated;
 - (void)selectItemAtIndex:(NSUInteger)index animated:(BOOL)animated;
+- (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction;
 
 @end
 
