@@ -13,17 +13,18 @@
 
 @interface HZScrollerBar : UIView
 
-@property (nonatomic, assign) id <HZScrollerBarDelegate> delegate;
+@property (nonatomic, weak) id <HZScrollerBarDelegate> delegate;
 @property (nonatomic, copy) NSArray *items;
 @property (nonatomic, strong) IBOutlet UIView *titleView;
 @property (nonatomic, strong) HZScrollerItem *selectedItem;
 
 - (void)setItems:(NSArray *)items animated:(BOOL)animated;
+- (void)selectItemAtIndex:(NSUInteger)index animated:(BOOL)animated;
 
 @end
 
 @protocol HZScrollerBarDelegate <NSObject>
 
-- (void)scrollerBar:(HZScrollerBar*)scrollerBar didSelectItem:(HZScrollerItem*)item;
+- (void)scrollerBar:(HZScrollerBar*)scrollerBar didSelectItem:(HZScrollerItem*)item atIndex:(NSUInteger)index;
 
 @end

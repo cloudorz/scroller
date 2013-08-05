@@ -8,7 +8,7 @@
 
 #import "HZScrollerController.h"
 
-@interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate>
+@interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate, HZScrollerBarDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
@@ -25,6 +25,7 @@
      NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
     _selectedIndex = -1;
     [self configureViewControllersFromStoryboard];
+    self.scrollerBar.delegate = self;
 }
 
 - (void)configureViewControllersFromStoryboard
@@ -35,14 +36,6 @@
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
 
-    [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
-        [vc setScrollerController:self];
-        if ([vc isKindOfClass:[UINavigationController class]])
-        {
-            [[vc topViewController] setScrollerController:self];
-            [vc setDelegate:self];
-        }
-    }];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -68,13 +61,47 @@
     self.scrollView.frame= scrollViewFrame;
 }
 
+- (void)initTheHeaderViewItems
+{
+    NSMutableArray *items = [NSMutableArray array];
+    [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
+        
+        [vc setScrollerController:self];
+        
+        HZScrollerItem *item = nil;
+        
+        if ([vc isKindOfClass:[UINavigationController class]])
+        {
+            [[vc topViewController] setScrollerController:self];
+            [vc setDelegate:self];
+            
+            item = [[vc topViewController] scrollerItem];
+        }
+        else
+        {
+            item = [vc scrollerItem];
+        }
+        
+        if (item)
+        {
+            [items addObject:item];
+        }
+        else
+        {
+            [items addObject:[HZScrollerItem scrollerItemWithImage:nil hintImage:nil]];
+        }
+    }];
+    
+    [self.scrollerBar setItems:items animated:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
     
 //    [self resetScrollViewHeight];
-    
+    [self initTheHeaderViewItems];
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
     [self setSelectedIndex:1 animated:NO];
@@ -115,6 +142,7 @@
         }
         
         [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
+        [self.scrollerBar selectItemAtIndex:selectedIndex animated:animated];
     }
 }
 
@@ -210,5 +238,12 @@
     NSLog(@"view contller did show: %@", viewController);
 }
 
-
+#pragma mark - scroller selected
+- (void)scrollerBar:(HZScrollerBar *)scrollerBar didSelectItem:(HZScrollerItem *)item atIndex:(NSUInteger)index
+{
+    if ([scrollerBar isEqual:self.scrollerBar])
+    {
+        [self setSelectedIndex:index animated:YES];
+    }
+}
 @end
