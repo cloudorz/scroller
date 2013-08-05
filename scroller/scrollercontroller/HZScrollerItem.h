@@ -10,4 +10,7 @@
 
 @interface HZScrollerItem : UIButton
 
+@property (strong, nonatomic) NSString *itemName;
+
++ (id)scrollerItemWithImage:(UIImage*)img hintImage:(UIImage*)hintImg;
 @end

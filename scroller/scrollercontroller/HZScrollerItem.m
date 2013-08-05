@@ -10,4 +10,15 @@
 
 @implementation HZScrollerItem
 
++ (id)scrollerItemWithImage:(UIImage*)img hintImage:(UIImage*)hintImg
+{
+    HZScrollerItem *item = [[self class] buttonWithType:UIButtonTypeCustom];
+
+    [item setBackgroundImage:img forState:UIControlStateNormal];
+    [item setBackgroundImage:hintImg forState:UIControlStateHighlighted];
+    [item setBackgroundImage:hintImg forState:UIControlStateSelected];
+    
+    return item;
+}
+
 @end
