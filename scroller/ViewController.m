@@ -64,8 +64,8 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
     label.backgroundColor = [UIColor redColor];
     label.font = [UIFont systemFontOfSize:28.0f];
-    label.text = @"我是一页纸";
-    [self setTitleView:label animatedDirection:HZAnimatedTop];
+    label.text = @"我是设置页";
+    [self setTitleView:label animatedDirection:(animated ? HZAnimatedLeft : HZAnimatedNo)];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 }
 

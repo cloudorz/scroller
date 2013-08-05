@@ -71,6 +71,12 @@
 {
     [super viewDidSelected:animated];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
+    label.backgroundColor = [UIColor redColor];
+    label.font = [UIFont systemFontOfSize:28.0f];
+    label.text = @"我是榜单页";
+    [self setTitleView:label animatedDirection:(animated ? HZAnimatedLeft : HZAnimatedNo)];
 }
 
 - (void)didReceiveMemoryWarning
