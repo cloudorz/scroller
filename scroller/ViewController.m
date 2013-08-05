@@ -76,4 +76,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (HZScrollerItem*)scrollerItem
+{
+    return [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Setting"] hintImage:[UIImage imageNamed:@"Indicator_Setting_Hit"]];
+}
+
 @end

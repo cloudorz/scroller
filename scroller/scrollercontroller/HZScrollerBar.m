@@ -57,15 +57,14 @@ const static CGFloat kItemHeight = 20.0f;
 
 - (void)itemAction:(HZScrollerItem*)item
 {
-    self.selectedItem.selected = NO;
     
-    item.selected = YES;
+    NSUInteger index = [self.items indexOfObject:item];
     
-    self.selectedItem = item;
+    [self setSelectedItemIndex:@(index)];
     
     if ([self.delegate respondsToSelector:@selector(scrollerBar:didSelectItem:atIndex:)])
     {
-        [self.delegate scrollerBar:self didSelectItem:item atIndex:self.selectedItemIndex.integerValue];
+        [self.delegate scrollerBar:self didSelectItem:item atIndex:index];
     }
 }
 
@@ -75,7 +74,12 @@ const static CGFloat kItemHeight = 20.0f;
     {
         _selectedItemIndex = selectedItemIndex;
         
-        [self itemAction:self.items[selectedItemIndex.integerValue]];
+        self.selectedItem.selected = NO;
+        
+        HZScrollerItem *item = self.items[selectedItemIndex.integerValue];
+        item.selected = YES;
+        
+        self.selectedItem = item;
     }
 }
 

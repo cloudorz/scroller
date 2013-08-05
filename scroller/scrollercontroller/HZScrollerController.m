@@ -100,8 +100,10 @@
     [super viewDidLoad];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
     
-//    [self resetScrollViewHeight];
+    self.scrollerBar.delegate = self;
+
     [self initTheHeaderViewItems];
+    
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
     [self setSelectedIndex:1 animated:NO];
