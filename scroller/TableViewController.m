@@ -81,6 +81,10 @@
 
 - (HZScrollerItem*)scrollerItem
 {
-    return [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Tops"] hintImage:[UIImage imageNamed:@"Indicator_Tops_Hit"]];
+    HZScrollerItem *item = [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Tops"]
+                                                       hintImage:[UIImage imageNamed:@"Indicator_Tops_Hit"]];
+    item.itemName = @"Tops";
+    
+    return item;
 }
 @end

@@ -78,7 +78,11 @@
 
 - (HZScrollerItem*)scrollerItem
 {
-    return [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Setting"] hintImage:[UIImage imageNamed:@"Indicator_Setting_Hit"]];
+    HZScrollerItem *item = [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Setting"]
+                                                       hintImage:[UIImage imageNamed:@"Indicator_Setting_Hit"]];
+    item.itemName = @"Setting";
+    
+    return item;
 }
 
 @end

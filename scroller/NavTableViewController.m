@@ -82,7 +82,10 @@
 #pragma mark - Table view data source
 - (HZScrollerItem*)scrollerItem
 {
-    return [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Home"] hintImage:[UIImage imageNamed:@"Indicator_Home_Hit"]];
+    HZScrollerItem *item = [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Home"]
+                                       hintImage:[UIImage imageNamed:@"Indicator_Home_Hit"]];
+    item.itemName = @"Home";
+    return item;
 }
 
 @end
