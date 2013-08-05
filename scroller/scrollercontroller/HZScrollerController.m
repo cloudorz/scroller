@@ -17,7 +17,6 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)awakeFromNib
@@ -40,7 +39,7 @@
         [vc setScrollerController:self];
         if ([vc isKindOfClass:[UINavigationController class]])
         {
-            [[vc topViewController] setScrollerController:vc];
+            [[vc topViewController] setScrollerController:self];
             [vc setDelegate:self];
         }
     }];
