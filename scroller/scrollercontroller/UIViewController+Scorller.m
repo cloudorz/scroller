@@ -94,4 +94,25 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 {
     [self.scrollerController.scrollerBar lowOpacity];
 }
+
+#pragma mark - scroll view delegate if viewcontroller have
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self lowScrollerBarShadow];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [self lowScrollerBarShadow];
+}
+
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    [self highScrollerBarShadow];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self highScrollerBarShadow];
+}
 @end

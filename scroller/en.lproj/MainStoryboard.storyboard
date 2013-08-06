@@ -56,6 +56,10 @@
                                 </view>
                             </tableViewCell>
                         </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9e9-1X-2Mw" id="4XD-Nm-grK"/>
+                            <outlet property="delegate" destination="9e9-1X-2Mw" id="aLh-Fs-usJ"/>
+                        </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="tpk-es-Iey"/>
                 </tableViewController>

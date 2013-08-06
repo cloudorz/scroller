@@ -268,11 +268,17 @@ const static CGFloat kMargin = 12.0f;
 #pragma mark - shadow
 - (void)highOpacity
 {
-    self.shadowLayer.opacity = 1.f;
+    if (self.shadowLayer.opacity < 1.f)
+    {
+        self.shadowLayer.opacity = 1.f;
+    }
 }
 
 - (void)lowOpacity
 {
-    self.shadowLayer.opacity = 0.4f;
+    if (self.shadowLayer.opacity > 0.4f)
+    {
+        self.shadowLayer.opacity = 0.4f;
+    }
 }
 @end
