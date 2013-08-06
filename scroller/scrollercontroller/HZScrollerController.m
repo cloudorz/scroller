@@ -119,32 +119,38 @@
 {
     if (_selectedIndex != selectedIndex)
     {
-        _selectedIndex = selectedIndex;
-        
-//        UIViewController *prevVC = self.selectedViewController;
         
         UIViewController *vc = self.viewControllers[selectedIndex];
         self.selectedViewController = vc;
         
-        if (vc.view.superview == nil)
+        UIViewController *topVC = nil;
+
+        if ([vc respondsToSelector:@selector(topViewController)])
         {
-            [self addViewControllerToScroller:vc];
-            // TODO: trigger didload method
+            topVC = [(id)vc topViewController];
         }
         else
         {
-            if ([vc respondsToSelector:@selector(topViewController)])
-            {
-                [[(id)vc topViewController] viewDidSelected:YES];
-            }
-            else
-            {
-                [vc viewDidSelected:YES];
-            }
+            topVC = vc;
+        }
+        
+        [self.scrollerBar setTitleView:[topVC scrollerTitleView] animatedDirection:(selectedIndex > _selectedIndex) ? HZAnimatedRight : HZAnimatedLeft];
+ 
+        
+        if (vc.view.superview == nil)
+        {
+            [self addViewControllerToScroller:vc];
+            // TODO: trigger didselect method
+        }
+        else
+        {
+            [topVC viewDidSelected:YES];
         }
         
         [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
         [self.scrollerBar selectItemAtIndex:selectedIndex animated:animated];
+        
+        _selectedIndex = selectedIndex;
     }
 }
 

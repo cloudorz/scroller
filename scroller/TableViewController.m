@@ -17,7 +17,18 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+    [self initTitleView];
     NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
+}
+
+- (void)initTitleView
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
+    label.backgroundColor = [UIColor redColor];
+    label.font = [UIFont systemFontOfSize:28.0f];
+    label.text = @"我是榜单页";
+    
+    self.scrollerTitleView = label;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -32,12 +43,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
-    _label.backgroundColor = [UIColor redColor];
-    _label.font = [UIFont systemFontOfSize:28.0f];
-    _label.text = @"我是榜单页";
-
-    [self setTitleView:self.label animatedDirection:HZAnimatedLeft];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
 }
 
@@ -71,8 +76,7 @@
 {
     [super viewDidSelected:animated];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
-    
-    [self setTitleView:self.label animatedDirection:(animated ? HZAnimatedLeft : HZAnimatedNo)];
+
 }
 
 - (void)didReceiveMemoryWarning
