@@ -26,7 +26,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:28.0f];
-    label.textColor = [UIColor whiteColor];
+    label.textColor = [UIColor blackColor];
     label.text = @"我是榜单页";
     
     self.scrollerTitleView = label;

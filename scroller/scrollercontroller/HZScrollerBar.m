@@ -35,6 +35,9 @@ const static CGFloat kMargin = 12.0f;
 
 - (void)doInitBar
 {
+    // background color
+    self.backgroundColor = [UIColor whiteColor];
+    
     // title view's container
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 195, self.frame.size.height)];
     _containerView.backgroundColor = self.backgroundColor;
@@ -67,7 +70,6 @@ const static CGFloat kMargin = 12.0f;
     _shadowLayer.opacity = 0.4f;
     
     [self.layer insertSublayer:_shadowLayer atIndex:0];
-
 }
 
 - (id)initWithFrame:(CGRect)frame
