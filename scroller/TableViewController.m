@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  TableViewController.m
 //  scroller
 //
 //  Created by Cloud Dai on 13-6-23.
 //  Copyright (c) 2013年 Cloud Dai. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "TableViewController.h"
 
-@interface ViewController ()
+@interface TableViewController ()
 @property (strong, nonatomic) UILabel *label;
 @end
 
-@implementation ViewController
+@implementation TableViewController
 
 - (void)awakeFromNib
 {
@@ -27,15 +27,23 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:28.0f];
     label.textColor = [UIColor blackColor];
-    label.text = @"我是设置页";
+    label.text = @"我是榜单页";
     
     self.scrollerTitleView = label;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initTitleView];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
 }
 
@@ -68,14 +76,9 @@
 - (void)viewDidSelected:(BOOL)animated
 {
     [super viewDidSelected:animated];
-    [self setScollerPopTitle:@"亲，你的邮箱还没有设置哦" at:2];
+    [self setScollerPopTitle:@"你的名次有掉落了哦" at:0];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
-}
 
-- (IBAction)showModalPage:(id)sender
-{
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"showModal"];
-    [self.scrollerController presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -86,11 +89,10 @@
 
 - (HZScrollerItem*)scrollerItem
 {
-    HZScrollerItem *item = [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Setting"]
-                                                       hintImage:[UIImage imageNamed:@"Indicator_Setting_Hit"]];
-    item.itemName = @"Setting";
+    HZScrollerItem *item = [HZScrollerItem scrollerItemWithImage:[UIImage imageNamed:@"Indicator_Tops"]
+                                                       hintImage:[UIImage imageNamed:@"Indicator_Tops_Hit"]];
+    item.itemName = @"Tops";
     
     return item;
 }
-
 @end
