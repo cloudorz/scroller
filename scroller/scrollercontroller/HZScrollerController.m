@@ -10,7 +10,7 @@
 
 @interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate, HZScrollerBarDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@property (strong, nonatomic) UIView *maskView;
 @end
 
 @implementation HZScrollerController
@@ -36,6 +36,17 @@
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
 
+}
+
+- (UIView *)maskView
+{
+    if (_maskView == nil)
+    {
+        _maskView = [[UIView alloc] initWithFrame:self.view.bounds];
+        _maskView.backgroundColor = [UIColor blackColor];
+    }
+    
+    return _maskView;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -213,6 +224,29 @@
         [self setSelectedIndex:page animated:NO];
     }
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offsetX = scrollView.contentOffset.x;
+    CGFloat currentLeftX = self.selectedViewController.view.frame.origin.x;
+    
+    CGFloat delta = ABS(offsetX - currentLeftX);
+    if (delta > 10)
+    {
+        if (![self.maskView.superview isEqual:self.selectedViewController.view])
+        {
+            [self.selectedViewController.view addSubview:self.maskView];
+        }
+        self.maskView.alpha = 0.6*(delta/self.selectedViewController.view.frame.size.width);
+    }
+    else
+    {
+        if (self.maskView.superview)
+        {
+            [self.maskView removeFromSuperview];
+        }
+    }
 }
 
 #pragma mark - uinavigationcontroller delegate
