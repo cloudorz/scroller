@@ -19,6 +19,8 @@
 
 - (void)setScollerPopTitle:(NSString *)title at:(NSUInteger)index;
 - (void)viewDidSelected:(BOOL)animated;
+- (void)highScrollerBarShadow;
+- (void)lowScrollerBarShadow;
 - (BOOL)isModal;
 
 @end

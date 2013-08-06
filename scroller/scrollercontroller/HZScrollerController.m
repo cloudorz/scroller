@@ -149,7 +149,6 @@
         
         [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
         [self.scrollerBar selectItemAtIndex:selectedIndex animated:animated];
-        [self.scrollerBar setPopTitle:@" 我爱你亲爱的姑娘我爱你亲爱的姑娘我爱你亲爱的姑娘我爱你亲爱的姑娘 " at:selectedIndex];
         
         _selectedIndex = selectedIndex;
     }

@@ -83,4 +83,15 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 {
     [self.scrollerController.scrollerBar setPopTitle:title at:index];
 }
+
+#pragma mark - shadow of scroller bar
+- (void)highScrollerBarShadow
+{
+    [self.scrollerController.scrollerBar highOpacity];
+}
+
+- (void)lowScrollerBarShadow
+{
+    [self.scrollerController.scrollerBar lowOpacity];
+}
 @end
