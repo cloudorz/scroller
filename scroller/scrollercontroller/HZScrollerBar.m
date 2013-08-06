@@ -17,6 +17,7 @@ const static CGFloat kMargin = 12.0f;
 
 @property (nonatomic, strong) NSNumber *selectedItemIndex;
 @property (nonatomic, strong) UIView *titleView;
+@property (nonatomic, strong) UIView *containerView;
 
 @end
 
@@ -24,7 +25,11 @@ const static CGFloat kMargin = 12.0f;
 
 - (void)doInitBar
 {
-    self.clipsToBounds = YES;
+    _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 195, self.frame.size.height)];
+    _containerView.backgroundColor = self.backgroundColor;
+    _containerView.clipsToBounds = YES;
+    
+    [self addSubview:_containerView];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -116,7 +121,7 @@ const static CGFloat kMargin = 12.0f;
         [_titleView removeFromSuperview];
         
         titleView.transform = newViewTransform;
-        [self addSubview:titleView];
+        [self.containerView addSubview:titleView];
         
         _titleView = titleView;
     }
@@ -140,7 +145,7 @@ const static CGFloat kMargin = 12.0f;
         }
         
         titleView.alpha = 0.25;
-        [self addSubview:titleView];
+        [self.containerView addSubview:titleView];
         
         [UIView animateWithDuration:0.36
                          animations:^{
