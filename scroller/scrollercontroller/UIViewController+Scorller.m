@@ -96,6 +96,7 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 }
 
 #pragma mark - scroll view delegate if viewcontroller have
+// QQ: 是否有必要为了方便, 将这些东东放着
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self lowScrollerBarShadow];
