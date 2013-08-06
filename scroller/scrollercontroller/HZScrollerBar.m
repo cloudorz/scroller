@@ -137,7 +137,7 @@ const static CGFloat kMargin = 12.0f;
         
         switch (direction) {
             case HZAnimatedLeft:
-                oldViewTransform = CGAffineTransformMakeTranslation(_titleView.frame.origin.x+_titleView.frame.size.width, _titleView.frame.origin.y);
+                oldViewTransform = CGAffineTransformMakeTranslation(self.containerView.frame.size.width, _titleView.frame.origin.y);
                 titleView.transform = CGAffineTransformMakeTranslation(-titleView.frame.size.width, newViewY);
                 break;
                 
