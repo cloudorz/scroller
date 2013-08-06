@@ -14,10 +14,18 @@ const static CGFloat kItemHeight = 20.0f;
 const static CGFloat kMargin = 12.0f;
 
 @interface HZScrollerBar ()
+{
+    NSString *_popTitle;
+    NSUInteger _index;
+}
 
 @property (nonatomic, strong) NSNumber *selectedItemIndex;
 @property (nonatomic, strong) UIView *titleView;
 @property (nonatomic, strong) UIView *containerView;
+// about pop view
+@property (nonatomic, strong) UIImageView *popView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UIImage *resizeableImage;
 
 @end
 
@@ -28,8 +36,62 @@ const static CGFloat kMargin = 12.0f;
     _containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 195, self.frame.size.height)];
     _containerView.backgroundColor = self.backgroundColor;
     _containerView.clipsToBounds = YES;
-    
     [self addSubview:_containerView];
+    
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 18, 56, 18)];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.font = [UIFont boldSystemFontOfSize:16.f];
+    _titleLabel.textAlignment = UITextAlignmentCenter;
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.opaque = YES;
+    _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    _popView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bg_NewTip"]];
+    [_popView addSubview:_titleLabel];
+    _popView.hidden = YES;
+    
+    [self addSubview:_popView];
+}
+
+- (UIImage *)resizeableImage
+{
+    if (_resizeableImage == nil)
+    {
+        _resizeableImage = [[UIImage imageNamed:@"Bg_NewTip"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 40, 0, 50)];
+    }
+    
+    return _resizeableImage;
+}
+
+- (void)setPopTitle:(NSString *)title at:(NSUInteger)index
+{
+
+    if (![_popTitle isEqualToString:title])
+    {
+        _popTitle = title;
+
+        CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
+        CGFloat popWidth = MIN(320.f, MAX(titleSize.width+36.f, 92.f));
+        CGRect popFrame = self.popView.frame;
+        popFrame.size.width = popWidth;
+        self.popView.frame = popFrame;
+        self.titleLabel.text = title;
+        self.popView.image = self.resizeableImage;
+    }
+    
+    if (_index != index)
+    {
+        _index = index;
+        
+        HZScrollerItem *item = self.items[index];
+        CGRect popFrame = self.popView.frame;
+        popFrame.origin.x = item.center.x - (self.popView.frame.size.width - 41.f);
+        popFrame.origin.y = item.center.y + 2.f;
+        self.popView.frame = popFrame;
+    }
+    
+    self.popView.hidden = (!title);
+    
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -183,4 +245,9 @@ const static CGFloat kMargin = 12.0f;
 
 }
 
+#pragma mark - pop view
+- (void)setPopAt:(NSUInteger)index withTitle:(NSString*)title
+{
+    
+}
 @end
