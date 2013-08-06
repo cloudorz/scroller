@@ -62,6 +62,11 @@ const static CGFloat kMargin = 12.0f;
         
         CGFloat x = self.frame.size.width - (kMargin + kItemWidth*items.count + kitemDistance*(items.count-1));
         
+        // set container view width
+        CGRect containerFrame = self.containerView.frame;
+        containerFrame.size.width = x;
+        self.containerView.frame = containerFrame;
+        
         [items enumerateObjectsUsingBlock:^(HZScrollerItem *item, NSUInteger idx, BOOL *stop){
             
             item.frame = CGRectMake(x+(kItemWidth+kitemDistance)*idx, (self.frame.size.height-kItemHeight)/2, kItemWidth, kItemHeight);

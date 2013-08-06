@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
+@property (strong, nonatomic) UILabel *label;
 @end
 
 @implementation ViewController
@@ -23,13 +23,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
+    _label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
+    _label.backgroundColor = [UIColor redColor];
+    _label.font = [UIFont systemFontOfSize:28.0f];
+    _label.text = @"我是设置页";
+
+    [self setTitleView:self.label animatedDirection:HZAnimatedLeft];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
 }
 
@@ -37,6 +36,7 @@
 {
     [super viewWillAppear:animated];
     NSLog(@"%@ - view will appear", NSStringFromClass([self class]));
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,11 +61,8 @@
 - (void)viewDidSelected:(BOOL)animated
 {
     [super viewDidSelected:animated];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];
-    label.backgroundColor = [UIColor redColor];
-    label.font = [UIFont systemFontOfSize:28.0f];
-    label.text = @"我是设置页";
-    [self setTitleView:label animatedDirection:(animated ? HZAnimatedLeft : HZAnimatedNo)];
+
+    [self setTitleView:self.label animatedDirection:(animated ? HZAnimatedLeft : HZAnimatedNo)];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 }
 
