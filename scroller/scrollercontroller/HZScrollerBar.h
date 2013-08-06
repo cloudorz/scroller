@@ -28,6 +28,7 @@ typedef NS_ENUM(NSUInteger, HZAnimatedDirection){
 - (void)setItems:(NSArray *)items animated:(BOOL)animated;
 - (void)selectItemAtIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction;
+- (void)setPopTitle:(NSString *)title at:(NSUInteger)index;
 
 @end
 

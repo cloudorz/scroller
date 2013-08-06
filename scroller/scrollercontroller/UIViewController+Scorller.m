@@ -78,5 +78,9 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
     
 }
 
-#pragma mark - item name 
+#pragma mark - set pop view title
+- (void)setScollerPopTitle:(NSString *)title at:(NSUInteger)index
+{
+    [self.scrollerController.scrollerBar setPopTitle:title at:index];
+}
 @end

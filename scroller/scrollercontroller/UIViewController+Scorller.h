@@ -17,6 +17,8 @@
 @property (strong, nonatomic) HZScrollerItem *scrollerItem;
 @property (strong, nonatomic) UIView *scrollerTitleView;
 
+- (void)setScollerPopTitle:(NSString *)title at:(NSUInteger)index;
 - (void)viewDidSelected:(BOOL)animated;
 - (BOOL)isModal;
+
 @end

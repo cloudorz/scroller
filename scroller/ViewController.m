@@ -68,7 +68,7 @@
 - (void)viewDidSelected:(BOOL)animated
 {
     [super viewDidSelected:animated];
-
+    [self setScollerPopTitle:@"亲，你的邮箱还没有设置哦" at:2];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 }
 

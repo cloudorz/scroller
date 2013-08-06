@@ -86,7 +86,7 @@
 - (void)viewDidSelected:(BOOL)animated
 {
     [super viewDidSelected:animated];
-
+    [self setScollerPopTitle:@"美女，你还有很多金币可拿哦" at:1];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 }
 

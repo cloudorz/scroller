@@ -76,6 +76,7 @@
 - (void)viewDidSelected:(BOOL)animated
 {
     [super viewDidSelected:animated];
+    [self setScollerPopTitle:@"你的名次有掉落了哦" at:0];
     NSLog(@"%@ - view did selected", NSStringFromClass([self class]));
 
 }
