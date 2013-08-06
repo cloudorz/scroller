@@ -133,16 +133,27 @@ const static CGFloat kMargin = 12.0f;
     else
     {
         CGAffineTransform oldViewTransform;
-
+        CGFloat newViewY = (self.containerView.frame.size.height-titleView.frame.size.height)/2;
+        
         switch (direction) {
             case HZAnimatedLeft:
                 oldViewTransform = CGAffineTransformMakeTranslation(_titleView.frame.origin.x+_titleView.frame.size.width, _titleView.frame.origin.y);
-                titleView.transform = CGAffineTransformMakeTranslation(-titleView.frame.size.width, (self.frame.size.height-titleView.frame.size.height)/2);
+                titleView.transform = CGAffineTransformMakeTranslation(-titleView.frame.size.width, newViewY);
+                break;
+                
+            case HZAnimatedRight:
+                oldViewTransform = CGAffineTransformMakeTranslation(-_titleView.frame.size.width, _titleView.frame.origin.y);
+                titleView.transform = CGAffineTransformMakeTranslation(self.containerView.frame.size.width, newViewY);
                 break;
                 
             case HZAnimatedTop:
-                oldViewTransform = CGAffineTransformMakeTranslation(kMargin, self.frame.size.height);
+                oldViewTransform = CGAffineTransformMakeTranslation(kMargin, self.containerView.frame.size.height);
                 titleView.transform = CGAffineTransformMakeTranslation(kMargin, -titleView.frame.size.height);
+                break;
+                
+            case HZAnimatedBottom:
+                oldViewTransform = CGAffineTransformMakeTranslation(kMargin, -_titleView.frame.size.height);
+                titleView.transform = CGAffineTransformMakeTranslation(kMargin, self.containerView.frame.size.height);
                 break;
                 
             default:

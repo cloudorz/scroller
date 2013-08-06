@@ -12,7 +12,9 @@
 typedef NS_ENUM(NSUInteger, HZAnimatedDirection){
     HZAnimatedNo,
     HZAnimatedLeft,
+    HZAnimatedRight,
     HZAnimatedTop,
+    HZAnimatedBottom,
 };
 
 @protocol HZScrollerBarDelegate;
