@@ -51,7 +51,10 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 // call this method when view did load
 - (void)viewDidSelected:(BOOL)animated
 {
-    NSLog(@"Do Nothing");
+}
+
+- (void)initTitleView
+{
 }
 
 - (BOOL)isModal
@@ -78,6 +81,11 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
     
 }
 
+- (void)checkForScrollerBarShowPopTitleView
+{
+    [self.scrollerController checkForShowPopTitleView];
+}
+
 #pragma mark - set pop view title
 - (void)setScollerPopTitle:(NSString *)title at:(NSUInteger)index
 {
@@ -96,7 +104,7 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 }
 
 #pragma mark - scroll view delegate if viewcontroller have
-// QQ: 是否有必要为了方便, 将这些东东放着
+// TODO: 是否有必要为了方便, 将这些东东放着
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     [self lowScrollerBarShadow];
@@ -115,5 +123,11 @@ static const void *ScrollerTitleViewKey = &ScrollerTitleViewKey;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [self highScrollerBarShadow];
+}
+
+#pragma mark - viewcontroller exchange
+- (void)jumpToControllerAtIndex:(NSUInteger)index animated:(BOOL)animated
+{
+    [self.scrollerController setSelectedIndex:index animated:animated];
 }
 @end

@@ -14,15 +14,6 @@
 
 @implementation NavTableViewController
 
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    [self initTitleView];
-    NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
-}
-
 - (void)initTitleView
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 140, 40)];

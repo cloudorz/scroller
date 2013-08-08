@@ -7,6 +7,7 @@
 //
 
 #import "HZScrollerController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate, HZScrollerBarDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -19,15 +20,7 @@
 {
 }
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-     NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
-    _selectedIndex = -1;
-    [self configureViewControllersFromStoryboard];
-    self.scrollerBar.delegate = self;
-}
-
+#pragma mark - init the scroller's controllers
 - (void)configureViewControllersFromStoryboard
 {
     // TODO: may use auto set
@@ -35,7 +28,31 @@
     self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
+    
+}
 
+- (void)doInitWork
+{
+    _selectedIndex = -1;
+    [self configureViewControllersFromStoryboard];
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
+    [self doInitWork];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        NSLog(@"I'm in...");
+        [self doInitWork];
+    }
+    return self;
 }
 
 - (UIView *)maskView
@@ -49,16 +66,6 @@
     return _maskView;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-        NSLog(@"I'm in...");
-    }
-    return self;
-}
-
 - (void)resetScrollViewHeight
 {
     CGRect scrollViewFrame = self.scrollView.frame;
@@ -70,6 +77,14 @@
     scrollViewFrame.size.height = self.view.frame.size.height - deltaHeight;
     scrollViewFrame.origin.y = deltaHeight;
     self.scrollView.frame= scrollViewFrame;
+}
+
+- (void)initAllControllersTitleView
+{
+    [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
+        
+        [[self getTopViewControllerFrom:vc] initTitleView];
+    }];
 }
 
 - (void)initTheHeaderViewItems
@@ -106,14 +121,47 @@
     [self.scrollerBar setItems:items animated:NO];
 }
 
+- (void)addViewControllerToScroller:(UIViewController*)viewController
+{
+    if (viewController.view.superview == nil)
+    {
+        NSUInteger index = [self.viewControllers indexOfObject:viewController];
+        viewController.view.frame = CGRectMake(self.scrollView.frame.size.width*index, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+        [self.scrollView addSubview:viewController.view];
+        NSLog(@"add viewcontroller view success.");
+    }
+    
+}
+
+- (id)getTopViewControllerFrom:(id)vc
+{
+    UIViewController *topVC = nil;
+    if ([vc respondsToSelector:@selector(topViewController)])
+    {
+        topVC = [vc topViewController];
+    }
+    else
+    {
+        topVC = vc;
+    }
+    
+    return topVC;
+}
+
+#pragma mark - scorller view init
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
     
+    // round corner
+    self.view.layer.cornerRadius = 4.f;
+    self.view.layer.masksToBounds = YES;
     self.scrollerBar.delegate = self;
 
     [self initTheHeaderViewItems];
+    
+    [self initAllControllersTitleView];
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
@@ -128,25 +176,28 @@
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated
 {
+    
+#if DEBUG
+    NSAssert(selectedIndex >= 0 && selectedIndex < self.viewControllers.count, @"Index out of bounds in scroller.");
+#else
+    if (selectedIndex < 0)
+    {
+        selectedIndex = 0;
+    }
+    else if (selectedIndex >= self.viewControllers.count)
+    {
+        selectedIndex = self.viewControllers.count - 1;
+    }
+#endif
+    
     if (_selectedIndex != selectedIndex)
     {
         
         UIViewController *vc = self.viewControllers[selectedIndex];
         self.selectedViewController = vc;
         
-        UIViewController *topVC = nil;
-
-        if ([vc respondsToSelector:@selector(topViewController)])
-        {
-            topVC = [(id)vc topViewController];
-        }
-        else
-        {
-            topVC = vc;
-        }
-        
-        [self.scrollerBar setTitleView:[topVC scrollerTitleView] animatedDirection:(selectedIndex > _selectedIndex) ? HZAnimatedRight : HZAnimatedLeft];
- 
+        [self.scrollerBar setTitleView:[[self getTopViewControllerFrom:vc] scrollerTitleView]
+                     animatedDirection:(selectedIndex > _selectedIndex) ? HZAnimatedRight : HZAnimatedLeft];
         
         if (vc.view.superview == nil)
         {
@@ -155,26 +206,15 @@
         }
         else
         {
-            [topVC viewDidSelected:YES];
+            [[self getTopViewControllerFrom:vc] viewDidSelected:YES];
         }
         
         [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
+        
         [self.scrollerBar selectItemAtIndex:selectedIndex animated:animated];
         
         _selectedIndex = selectedIndex;
     }
-}
-
-- (void)addViewControllerToScroller:(UIViewController*)viewController
-{
-    if (viewController.view.superview == nil)
-    {
-        NSUInteger index = [self.viewControllers indexOfObject:viewController];
-        viewController.view.frame = CGRectMake(self.scrollView.frame.size.width*index, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
-        [self.scrollView addSubview:viewController.view];
-        NSLog(@"add viewcontroller view success.");
-    }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -287,5 +327,10 @@
     {
         [self setSelectedIndex:index animated:YES];
     }
+}
+
+- (void)checkForShowPopTitleView
+{
+    [self.scrollerBar setPopTitle:[NSString stringWithFormat:@"%@门新课上架了", @(4)] at:2];
 }
 @end

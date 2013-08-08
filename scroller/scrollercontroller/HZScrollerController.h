@@ -20,6 +20,8 @@
 @property (nonatomic) NSInteger selectedIndex;
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
+- (void)checkForShowPopTitleView;
+
 @end
 
 @protocol HZScrollerControllerDelegate <NSObject>

@@ -17,10 +17,18 @@
 @property (strong, nonatomic) HZScrollerItem *scrollerItem;
 @property (strong, nonatomic) UIView *scrollerTitleView;
 
+- (void)jumpToControllerAtIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)setScollerPopTitle:(NSString *)title at:(NSUInteger)index;
+- (void)checkForScrollerBarShowPopTitleView;
 - (void)viewDidSelected:(BOOL)animated;
+- (void)initTitleView;
 - (void)highScrollerBarShadow;
 - (void)lowScrollerBarShadow;
 - (BOOL)isModal;
 
+// scroll view delegates
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
 @end

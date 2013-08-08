@@ -155,6 +155,9 @@ const static CGFloat kMargin = 12.0f;
 {
     if (!titleView)
     {
+        [_titleView removeFromSuperview];
+        _titleView = nil;
+        
         return;
     }
     
