@@ -360,7 +360,7 @@
 #pragma mark - scroller selected
 - (void)scrollerBar:(HZScrollerBar *)scrollerBar didSelectItem:(HZScrollerItem *)item atIndex:(NSUInteger)index
 {
-    if ([scrollerBar isEqual:self.scrollerBar])
+    if ([scrollerBar isEqual:self.scrollerBar] && index != self.selectedIndex)
     {
         [self setAllTopViewsUserInteraction:NO];
         [self setSelectedIndex:index animated:YES];
@@ -369,7 +369,7 @@
 
 - (BOOL)scrollerBar:(HZScrollerBar *)scrollerBar shouldSelectItem:(HZScrollerItem *)item atIndex:(NSUInteger)index
 {
-    return ([scrollerBar isEqual:self.scrollerBar] && self.scrollView.scrollEnabled);
+    return ([scrollerBar isEqual:self.scrollerBar] && self.scrollView.scrollEnabled && index != self.selectedIndex);
 }
 
 - (void)checkForShowPopTitleView

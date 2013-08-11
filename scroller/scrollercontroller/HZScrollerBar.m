@@ -157,6 +157,13 @@ const static CGFloat kMargin = 12.0f;
     self.selectedItemIndex = @(index);
 }
 
+- (void)setItemsInteractionEnable:(BOOL)enable
+{
+    [self.items enumerateObjectsUsingBlock:^(HZScrollerItem *item, NSUInteger idx, BOOL *stop){
+        item.enabled = enable;
+    }];
+}
+
 - (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction
 {
     if (!titleView)
@@ -209,8 +216,10 @@ const static CGFloat kMargin = 12.0f;
                 break;
         }
         
+
         titleView.alpha = 0;
         [self.containerView addSubview:titleView];
+        [self setItemsInteractionEnable:NO];
         
         [UIView animateWithDuration:0.15
                          animations:^{
@@ -228,8 +237,12 @@ const static CGFloat kMargin = 12.0f;
                              titleView.transform = newViewTransform;
                          }
                          completion:^(BOOL finished){
-                             [_titleView removeFromSuperview];
-                             _titleView = titleView;
+                             if (finished)
+                             {
+                                 [_titleView removeFromSuperview];
+                                 _titleView = titleView;
+                                 [self setItemsInteractionEnable:YES];
+                             }
                          }];
     }
 
