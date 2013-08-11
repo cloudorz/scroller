@@ -36,6 +36,8 @@ typedef NS_ENUM(NSUInteger, HZAnimatedDirection){
 
 @protocol HZScrollerBarDelegate <NSObject>
 
+@optional
 - (void)scrollerBar:(HZScrollerBar*)scrollerBar didSelectItem:(HZScrollerItem*)item atIndex:(NSUInteger)index;
+- (BOOL)scrollerBar:(HZScrollerBar*)scrollerBar shouldSelectItem:(HZScrollerItem*)item atIndex:(NSUInteger)index;
 
 @end

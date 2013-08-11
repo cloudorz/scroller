@@ -24,7 +24,7 @@
 - (void)configureViewControllersFromStoryboard
 {
     // TODO: may use auto set
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard = self.storyboard;
     self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"navC"],
                              [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
@@ -165,7 +165,7 @@
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
-    [self setSelectedIndex:1 animated:NO];
+    [self setSelectedIndex:1 animated:YES];
 }
 
 - (void)hideScorllerBar:(BOOL)hide
@@ -209,9 +209,17 @@
             [[self getTopViewControllerFrom:vc] viewDidSelected:YES];
         }
         
-        [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
-        
         [self.scrollerBar selectItemAtIndex:selectedIndex animated:animated];
+        
+        if (!animated)
+        {
+        
+            [self clearAllBlocks];
+        }
+        else
+        {
+            [self.scrollView scrollRectToVisible:vc.view.frame animated:animated];
+        }
         
         _selectedIndex = selectedIndex;
     }
@@ -255,9 +263,27 @@
 
 
 # pragma mark - scrollview delegate
+- (void)setAllTopViewsUserInteraction:(BOOL)enabled
+{
+    self.scrollerBar.userInteractionEnabled = enabled;
+    [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
+        [[[self getTopViewControllerFrom:vc] view] setUserInteractionEnabled:enabled];
+    }];
+}
+
+- (void)clearAllBlocks
+{
+    if (self.maskView.superview)
+    {
+        [self.maskView removeFromSuperview];
+    }
+    
+    [self setAllTopViewsUserInteraction:YES];
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if ([self.scrollView isEqual:scrollView])
+    if ([self.scrollView isEqual:scrollView] && !scrollView.isDragging)
     {
         CGFloat pageWidth = scrollView.frame.size.width;
         int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
@@ -272,19 +298,21 @@
     CGFloat currentLeftX = self.selectedViewController.view.frame.origin.x;
     
     CGFloat delta = ABS(offsetX - currentLeftX);
-    if (delta > 10)
+    if (delta > 10 && (scrollView.decelerating || scrollView.dragging))
     {
         if (![self.maskView.superview isEqual:self.selectedViewController.view])
         {
             [self.selectedViewController.view addSubview:self.maskView];
         }
         self.maskView.alpha = 0.6*(delta/self.selectedViewController.view.frame.size.width);
+        
+        [self setAllTopViewsUserInteraction:NO];
     }
     else
     {
-        if (self.maskView.superview)
+        if (!scrollView.isDragging)
         {
-            [self.maskView removeFromSuperview];
+            [self clearAllBlocks];
         }
     }
 }
@@ -292,32 +320,41 @@
 #pragma mark - uinavigationcontroller delegate
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    NSUInteger count = navigationController.viewControllers.count;
     
-    self.scrollView.scrollEnabled = (count == 1); // 第一页可滑动
-    
-    viewController.scrollerController = self;
-    
-    if (count > 1 && [self.scrollerBar.superview isEqual:self.view])
+    if ([self.selectedViewController isEqual:navigationController])
     {
-        [self.scrollerBar removeFromSuperview];
-        [[navigationController.viewControllers[0] view] addSubview:self.scrollerBar];
+        NSUInteger count = navigationController.viewControllers.count;
+        
+        self.scrollView.scrollEnabled = (count == 1); // 第一页可滑动
+        
+        viewController.scrollerController = self;
+        
+        if (count > 1 && [self.scrollerBar.superview isEqual:self.view])
+        {
+            [self.scrollerBar removeFromSuperview];
+            [[navigationController.viewControllers[0] view] addSubview:self.scrollerBar];
+        }
+        
+        NSLog(@"view contller will show: %@", viewController);
     }
-
-    NSLog(@"view contller will show: %@", viewController);
+    
 }
 
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    NSUInteger count = navigationController.viewControllers.count;
-
-    if (count == 1 && ![self.scrollerBar.superview isEqual:self.view])
+    if ([self.selectedViewController isEqual:navigationController])
     {
-        [self.scrollerBar removeFromSuperview];
-        [self.view addSubview:self.scrollerBar];
+        NSUInteger count = navigationController.viewControllers.count;
+        
+        if (count == 1 && ![self.scrollerBar.superview isEqual:self.view])
+        {
+            [self.scrollerBar removeFromSuperview];
+            [self.view addSubview:self.scrollerBar];
+        }
+        
+        NSLog(@"view contller did show: %@", viewController);
     }
-    
-    NSLog(@"view contller did show: %@", viewController);
+
 }
 
 #pragma mark - scroller selected
@@ -325,8 +362,14 @@
 {
     if ([scrollerBar isEqual:self.scrollerBar])
     {
+        [self setAllTopViewsUserInteraction:NO];
         [self setSelectedIndex:index animated:YES];
     }
+}
+
+- (BOOL)scrollerBar:(HZScrollerBar *)scrollerBar shouldSelectItem:(HZScrollerItem *)item atIndex:(NSUInteger)index
+{
+    return ([scrollerBar isEqual:self.scrollerBar] && self.scrollView.scrollEnabled);
 }
 
 - (void)checkForShowPopTitleView
