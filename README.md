@@ -5,7 +5,7 @@
 * 将scrollercontroller拖入项目中
 * 在<你的项目名>.pch添加 UIViewController+Scorller.h
 
-```ruby
+```
  #import <Availability.h>
 
  #ifndef __IPHONE_5_0
