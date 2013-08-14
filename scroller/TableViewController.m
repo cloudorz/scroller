@@ -8,7 +8,7 @@
 
 #import "TableViewController.h"
 
-@interface TableViewController ()
+@interface TableViewController () <HZScrollerControllerDelegate>
 @property (strong, nonatomic) UILabel *label;
 @end
 

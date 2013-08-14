@@ -8,7 +8,7 @@
 
 #import "NavTableViewController.h"
 
-@interface NavTableViewController ()
+@interface NavTableViewController () <HZScrollerControllerDelegate>
 @property (strong, nonatomic) UILabel *label;
 @end
 
