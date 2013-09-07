@@ -14,6 +14,17 @@
 
 @implementation ContainerViewController
 
+- (void)configureViewControllers
+{
+    // TODO: may use auto set
+    UIStoryboard *storyboard = self.storyboard;
+    self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
+                             [storyboard instantiateViewControllerWithIdentifier:@"navC"],
+                             [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
+    
+    self.defaultSelectedIndex = 1;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

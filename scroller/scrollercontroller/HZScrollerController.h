@@ -17,7 +17,7 @@
 @property (nonatomic, strong) IBOutlet HZScrollerBar *scrollerBar;
 @property (nonatomic, copy) NSArray *viewControllers;
 @property (nonatomic, strong) UIViewController *selectedViewController;
-@property (nonatomic) NSInteger selectedIndex;
+@property (nonatomic) NSInteger selectedIndex, defaultSelectedIndex;
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex animated:(BOOL)animated;
 - (void)checkForShowPopTitleView;
@@ -29,5 +29,12 @@
 @optional
 - (BOOL)scrollerController:(HZScrollerController*)scrollerController shouldSelectViewController:(UIViewController*)viewController;
 - (void)scrollerController:(HZScrollerController*)scrollerController didSelectViewController:(UIViewController*)viewController;
+
+@end
+
+@protocol HZScrollerControllerProtocol <NSObject>
+
+@required
+- (void)configureViewControllers;
 
 @end

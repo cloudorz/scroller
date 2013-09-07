@@ -32,3 +32,10 @@
 - (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView;
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView;
 @end
+
+@protocol HZScrollerProtocol <NSObject>
+
+- (void)initTitleView;
+- (HZScrollerItem*)scrollerItem;
+
+@end

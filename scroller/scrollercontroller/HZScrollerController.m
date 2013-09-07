@@ -21,20 +21,15 @@
 }
 
 #pragma mark - init the scroller's controllers
-- (void)configureViewControllersFromStoryboard
+- (void)configureViewControllers
 {
-    // TODO: may use auto set
-    UIStoryboard *storyboard = self.storyboard;
-    self.viewControllers = @[[storyboard instantiateViewControllerWithIdentifier:@"tableC"],
-                             [storyboard instantiateViewControllerWithIdentifier:@"navC"],
-                             [storyboard instantiateViewControllerWithIdentifier:@"viewC"]];
-    
+    // waitting for someone
 }
 
 - (void)doInitWork
 {
     _selectedIndex = -1;
-    [self configureViewControllersFromStoryboard];
+    [self configureViewControllers];
 }
 
 - (void)awakeFromNib
@@ -165,7 +160,7 @@
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
-    [self setSelectedIndex:1 animated:YES];
+    [self setSelectedIndex:self.defaultSelectedIndex animated:YES];
 }
 
 - (void)hideScorllerBar:(BOOL)hide

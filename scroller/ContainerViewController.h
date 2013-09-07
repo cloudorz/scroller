@@ -8,6 +8,6 @@
 
 #import "HZScrollerController.h"
 
-@interface ContainerViewController : HZScrollerController
+@interface ContainerViewController : HZScrollerController <HZScrollerControllerProtocol>
 
 @end

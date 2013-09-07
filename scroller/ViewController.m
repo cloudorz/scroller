@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <HZScrollerControllerDelegate>
+@interface ViewController () <HZScrollerProtocol>
 @property (strong, nonatomic) UILabel *label;
 @end
 
