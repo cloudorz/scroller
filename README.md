@@ -15,12 +15,13 @@
  #ifdef __OBJC__
      #import <UIKit/UIKit.h>
      #import <Foundation/Foundation.h>
-     #import "UIViewController+Scorller.h"
+     #import "UIViewController+Scroller.h"
  #endif
 ```
 * 添加 QuartzCore.framework
 
 ##使用
 1. 待续…..
+2. 
 
  
