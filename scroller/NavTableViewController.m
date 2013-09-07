@@ -8,20 +8,11 @@
 
 #import "NavTableViewController.h"
 
-@interface NavTableViewController ()
+@interface NavTableViewController () <HZScrollerProtocol>
 @property (strong, nonatomic) UILabel *label;
 @end
 
 @implementation NavTableViewController
-
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    
-    [self initTitleView];
-    NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
-}
 
 - (void)initTitleView
 {

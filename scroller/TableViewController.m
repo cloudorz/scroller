@@ -8,18 +8,11 @@
 
 #import "TableViewController.h"
 
-@interface TableViewController ()
+@interface TableViewController () <HZScrollerProtocol>
 @property (strong, nonatomic) UILabel *label;
 @end
 
 @implementation TableViewController
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self initTitleView];
-    NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
-}
 
 - (void)initTitleView
 {

@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 const static CGFloat kItemWidth = 20.0f;
-const static CGFloat kitemDistance = 3.0f;
+const static CGFloat kitemDistance = 4.0f;
 const static CGFloat kItemHeight = 20.0f;
 const static CGFloat kMargin = 12.0f;
 
@@ -53,7 +53,7 @@ const static CGFloat kMargin = 12.0f;
     _titleLabel.opaque = YES;
     _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    // indicaotr pop view
+    // indicator pop view
     _popView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Bg_NewTip"]];
     [_popView addSubview:_titleLabel];
     _popView.hidden = YES;
@@ -120,15 +120,21 @@ const static CGFloat kMargin = 12.0f;
 
 - (void)itemAction:(HZScrollerItem*)item
 {
-    
     NSUInteger index = [self.items indexOfObject:item];
-    
-    [self setSelectedItemIndex:@(index)];
-    
-    if ([self.delegate respondsToSelector:@selector(scrollerBar:didSelectItem:atIndex:)])
+
+    if ([self.delegate respondsToSelector:@selector(scrollerBar:shouldSelectItem:atIndex:)])
     {
-        [self.delegate scrollerBar:self didSelectItem:item atIndex:index];
+        if ([self.delegate scrollerBar:self shouldSelectItem:item atIndex:index])
+        {
+            [self setSelectedItemIndex:@(index)];
+            
+            if ([self.delegate respondsToSelector:@selector(scrollerBar:didSelectItem:atIndex:)])
+            {
+                [self.delegate scrollerBar:self didSelectItem:item atIndex:index];
+            }
+        }
     }
+    
 }
 
 - (void)setSelectedItemIndex:(NSNumber*)selectedItemIndex
@@ -151,10 +157,20 @@ const static CGFloat kMargin = 12.0f;
     self.selectedItemIndex = @(index);
 }
 
+- (void)setItemsInteractionEnable:(BOOL)enable
+{
+    [self.items enumerateObjectsUsingBlock:^(HZScrollerItem *item, NSUInteger idx, BOOL *stop){
+        item.enabled = enable;
+    }];
+}
+
 - (void)setTitleView:(UIView *)titleView animatedDirection:(HZAnimatedDirection)direction
 {
     if (!titleView)
     {
+        [_titleView removeFromSuperview];
+        _titleView = nil;
+        
         return;
     }
     
@@ -200,24 +216,33 @@ const static CGFloat kMargin = 12.0f;
                 break;
         }
         
-        titleView.alpha = 0.25;
+
+        titleView.alpha = 0;
         [self.containerView addSubview:titleView];
+        [self setItemsInteractionEnable:NO];
         
-        [UIView animateWithDuration:0.36
+        [UIView animateWithDuration:0.15
+                         animations:^{
+                             _titleView.alpha = 0;
+                         }];
+        
+        [UIView animateWithDuration:0.35
+                         animations:^{
+                             titleView.alpha = 1;
+                         }];
+        
+        [UIView animateWithDuration:0.25
                          animations:^{
                              _titleView.transform = oldViewTransform;
-                             _titleView.alpha = 0.25;
                              titleView.transform = newViewTransform;
-                             titleView.alpha = 0.7;
                          }
                          completion:^(BOOL finished){
-                             [_titleView removeFromSuperview];
-                             _titleView = titleView;
-                             
-                             [UIView animateWithDuration:0.2
-                                              animations:^{
-                                                  titleView.alpha = 1.0;
-                                              }];
+                             if (finished)
+                             {
+                                 [_titleView removeFromSuperview];
+                                 _titleView = titleView;
+                                 [self setItemsInteractionEnable:YES];
+                             }
                          }];
     }
 
@@ -236,16 +261,17 @@ const static CGFloat kMargin = 12.0f;
 
 - (void)setPopTitle:(NSString *)title at:(NSUInteger)index
 {
-    
     if (![_popTitle isEqualToString:title])
     {
         _popTitle = title;
         
         CGSize titleSize = [title sizeWithFont:self.titleLabel.font];
         CGFloat popWidth = MIN(320.f, MAX(titleSize.width+36.f, 92.f));
+        
         CGRect popFrame = self.popView.frame;
         popFrame.size.width = popWidth;
         self.popView.frame = popFrame;
+        
         self.titleLabel.text = title;
         self.popView.image = self.resizeableImage;
     }

@@ -8,18 +8,11 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <HZScrollerProtocol>
 @property (strong, nonatomic) UILabel *label;
 @end
 
 @implementation ViewController
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
-    [self initTitleView];
-    NSLog(@"%@ - awake from nib", NSStringFromClass([self class]));
-}
 
 - (void)initTitleView
 {
@@ -35,7 +28,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initTitleView];
     NSLog(@"%@ - view did load", NSStringFromClass([self class]));
 }
 

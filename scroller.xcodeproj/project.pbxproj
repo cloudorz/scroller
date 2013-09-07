@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B35D8F217DAFC56008889C2 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B35D8F117DAFC56008889C2 /* ContainerViewController.m */; };
 		3B538A0717ADF6EE0054E71F /* Detail3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */; };
 		3B538A1117AFB38C0054E71F /* Indicator_Home_Hit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B538A0817AFB38C0054E71F /* Indicator_Home_Hit@2x.png */; };
 		3B538A1217AFB38C0054E71F /* Indicator_Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B538A0917AFB38C0054E71F /* Indicator_Home@2x.png */; };
@@ -65,6 +66,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B35D8F017DAFC56008889C2 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
+		3B35D8F117DAFC56008889C2 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		3B538A0517ADF6EE0054E71F /* Detail3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Detail3ViewController.h; sourceTree = "<group>"; };
 		3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Detail3ViewController.m; sourceTree = "<group>"; };
 		3B538A0817AFB38C0054E71F /* Indicator_Home_Hit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Indicator_Home_Hit@2x.png"; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				613EBE071777337D004FBA47 /* Detail2ViewController.m */,
 				3B538A0517ADF6EE0054E71F /* Detail3ViewController.h */,
 				3B538A0617ADF6EE0054E71F /* Detail3ViewController.m */,
+				3B35D8F017DAFC56008889C2 /* ContainerViewController.h */,
+				3B35D8F117DAFC56008889C2 /* ContainerViewController.m */,
 				613EBDA61776DDF9004FBA47 /* Supporting Files */,
 			);
 			path = scroller;
@@ -391,6 +396,7 @@
 				613EBE04177731EB004FBA47 /* DetailViewController.m in Sources */,
 				613EBE081777337E004FBA47 /* Detail2ViewController.m in Sources */,
 				3B538A0717ADF6EE0054E71F /* Detail3ViewController.m in Sources */,
+				3B35D8F217DAFC56008889C2 /* ContainerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
