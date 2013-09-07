@@ -74,7 +74,7 @@
     self.scrollView.frame= scrollViewFrame;
 }
 
-- (void)initAllControllersTitleView
+- (void)setupAllControllersTitleView
 {
     [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
         
@@ -82,7 +82,7 @@
     }];
 }
 
-- (void)initTheHeaderViewItems
+- (void)setupTheHeaderViewItems
 {
     NSMutableArray *items = [NSMutableArray array];
     [self.viewControllers enumerateObjectsUsingBlock:^(id vc, NSUInteger idx, BOOL *stop){
@@ -154,9 +154,9 @@
     self.view.layer.masksToBounds = YES;
     self.scrollerBar.delegate = self;
 
-    [self initTheHeaderViewItems];
+    [self setupTheHeaderViewItems];
     
-    [self initAllControllersTitleView];
+    [self setupAllControllersTitleView];
     
     self.scrollView.contentSize = CGSizeMake(self.viewControllers.count*self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 
