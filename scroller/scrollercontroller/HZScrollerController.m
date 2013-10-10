@@ -10,8 +10,10 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface HZScrollerController () <UIScrollViewDelegate, UINavigationControllerDelegate, HZScrollerBarDelegate>
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UIView *maskView;
+@property (strong, nonatomic) UIPageViewController *pageViewController;
 @end
 
 @implementation HZScrollerController

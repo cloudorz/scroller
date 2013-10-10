@@ -11,7 +11,7 @@
 
 @protocol  HZScrollerControllerDelegate;
 
-@interface HZScrollerController : UIViewController
+@interface HZScrollerController : UIViewController <UIPageViewControllerDelegate>
 
 @property (nonatomic, weak) id <HZScrollerControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet HZScrollerBar *scrollerBar;
